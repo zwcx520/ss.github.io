@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+	<style>
+		div{
+			text-align: center;
+			margin-top: 20%;
+			
+		}
+		.font{
+			font-size: 40px;
+			color: antiquewhite;
+			background-color: black;
+			text-align: center;
+		}
+	</style>
+<body>
+	<div><span class="font" id="runtime_span"></span></div>
+ <script>
+        function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new
+            Date("02/11/2003 00:00");
+            Y = new Date();
+            T = (Y.getTime() - X.getTime());
+            M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "已在世上: " + A + "天" + B + "小时" + C + "分" + D + "秒"
+        }
+        show_runtime();
+
+        
+
+        async function createCard() {
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.innerHTML = '';
+
+            for (let i = 0; i < 1; i++) {
+                const quote = await generateQuotes();
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.textContent = quote;
+
+                const copyButton = document.createElement('button');
+                copyButton.classList.add('copy-button')
+
+                copyButton.addEventListener('click', () => {
+                    copyToClipboard(quote, card);
+                });
+
+
+                cardContainer.appendChild(card);
+            }
+        }
+
+        function restart() {
+            createCard();
+        }
+        createCard();
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+            const overlay = document.getElementById('overlay');
+            overlay.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
